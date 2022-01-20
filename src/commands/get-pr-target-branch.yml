@@ -1,0 +1,21 @@
+description: Get GitHub PR Target Branch (if exists)
+parameters:
+  github_token:
+    description: Name of environment variable containing your Github Access Token
+    type: env_var_name
+    default: GITHUB_TOKEN
+steps:
+  - run:
+      name: Get Pull Request Target Branch
+      command: <<include(scripts/get-pr-target-branch.sh)>>
+      environment:
+        TOKEN: $<< parameters.github_token >>
+  - run:
+      name: Set Target Branch or Current Branch as Base Revision
+      command: |
+        if [[ -n "$CIRCLE_PULL_REQUEST" ]]; then
+          echo 'export BASE_REVISION="$GITHUB_PR_TARGET_BRANCH"' >> "$BASH_ENV"; source "$BASH_ENV"
+        else
+          echo 'export BASE_REVISION="$CIRCLE_BRANCH"' >> "$BASH_ENV"; source "$BASH_ENV"
+        fi
+        echo "Will be using" "$BASE_REVISION" "as the Target Base-Revision branch"

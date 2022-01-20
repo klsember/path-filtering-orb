@@ -3,12 +3,6 @@ description: >
   `output-path`.
 
 parameters:
-  base-revision:
-    type: string
-    default: "main"
-    description: >
-      The revision to compare the current one against for the purpose
-      of determining changed files.
   mapping:
     type: string
     default: ""
@@ -24,7 +18,6 @@ parameters:
 steps:
   - run:
       environment:
-        BASE_REVISION: << parameters.base-revision >>
         MAPPING: << parameters.mapping >>
         OUTPUT_PATH: << parameters.output-path >>
       name: Set parameters
