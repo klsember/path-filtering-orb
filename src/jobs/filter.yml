@@ -32,9 +32,9 @@ parameters:
     description: "Resource class to use"
     default: "small"
   github_token:
-    description: github access token
-    type: string
-    default: ""
+    description: Name of environment variable containing your Github Access Token
+    type: env_var_name
+    default: GITHUB_TOKEN
 
 steps:
   - when:

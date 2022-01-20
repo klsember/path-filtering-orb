@@ -1,7 +1,7 @@
 description: Get GitHub PR Target Branch (if exists)
 parameters:
   github_token:
-    description: github access token
+    description: Name of environment variable containing your Github Access Token
     type: env_var_name
     default: GITHUB_TOKEN
 steps:
@@ -35,7 +35,7 @@ steps:
           echo "There is no pull request associated with this commit"
         fi
       environment:
-        GITHUB_TOKEN: << parameters.github_token >>
+        GITHUB_TOKEN: $<< parameters.github_token >>
   - run:
       name: Set Target Branch or Current Branch as Base Revision
       command: |
