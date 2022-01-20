@@ -54,8 +54,8 @@ steps:
             at: << parameters.workspace_path >>
   - checkout
   - get-pr-target-branch:
-      owner: << parameters.owner >>
-      repo: << parameters.repo >>
+      organization: << parameters.organization >>
+      repository: << parameters.repository >>
       github_token: << parameters.github_token >>
   - set-parameters:
       mapping: << parameters.mapping >>
