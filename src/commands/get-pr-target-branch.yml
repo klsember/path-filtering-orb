@@ -11,7 +11,7 @@ parameters:
   github_token:
     description: github access token
     type: string
-    default: ''
+    default: ""
 steps:
   - run:
       name: Get Pull Request Target Branch
