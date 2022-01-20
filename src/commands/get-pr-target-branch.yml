@@ -13,9 +13,9 @@ steps:
   - run:
       name: Set Target Branch or Current Branch as Base Revision
       command: |
-        if [[ -n $CIRCLE_PULL_REQUEST ]]; then
-          echo 'export BASE_REVISION=$GITHUB_PR_TARGET_BRANCH' >> $BASH_ENV; source $BASH_ENV
+        if [[ -n "$CIRCLE_PULL_REQUEST" ]]; then
+          echo 'export BASE_REVISION="$GITHUB_PR_TARGET_BRANCH"' >> "$BASH_ENV"; source "$BASH_ENV"
         else
-          echo 'export BASE_REVISION=$CIRCLE_BRANCH' >> $BASH_ENV; source $BASH_ENV
+          echo 'export BASE_REVISION="$CIRCLE_BRANCH"' >> "$BASH_ENV"; source "$BASH_ENV"
         fi
-        echo "Will be using" $BASE_REVISION "as the Target Base-Revision branch"
+        echo "Will be using" "$BASE_REVISION" "as the Target Base-Revision branch"
