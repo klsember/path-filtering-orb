@@ -11,7 +11,7 @@ parameters:
   github_token:
     description: github access token
     type: string
-    default: $GITHUB_TOKEN
+    default: ''
 steps:
   - run:
       name: Get Pull Request Target Branch
@@ -32,7 +32,7 @@ steps:
           ## Create GH API to get target branch
           API_GITHUB="https://api.github.com/repos/$ORGANIZATION/$REPOSITORY"
           PR_REQUEST_URL="$API_GITHUB/pulls/$PR_NUMBER"
-          PR_RESPONSE=$(curl -H "Authorization: token $GITHUB_TOKEN" "$PR_REQUEST_URL")
+          PR_RESPONSE=$(curl -H "Authorization: token <<parameters. "$PR_REQUEST_URL")
 
           PR_TARGET_BRANCH=$(echo $PR_RESPONSE | jq -e '.base.ref' | tr -d '"')
           echo "PR_TARGET_BRANCH: $PR_TARGET_BRANCH"
