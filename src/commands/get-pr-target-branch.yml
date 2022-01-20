@@ -1,17 +1,9 @@
 description: Get GitHub PR Target Branch (if exists)
 parameters:
-  organization:
-    description: github project organization
-    type: string
-    default: $CIRCLE_PROJECT_USERNAME
-  repository:
-    description: github project reponame
-    type: string
-    default: $CIRCLE_PROJECT_REPONAME
   github_token:
     description: github access token
     type: string
-    default: $GITHUB_ACCESS_TOKEN
+    default: ""
 steps:
   - run:
       name: Get Pull Request Target Branch
@@ -30,7 +22,7 @@ steps:
           echo "export GITHUB_PR_NUMBER=$PR_NUMBER" >> $BASH_ENV
 
           ## Create GH API to get target branch
-          API_GITHUB="https://api.github.com/repos/$ORGANIZATION/$REPOSITORY"
+          API_GITHUB="https://api.github.com/repos/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME"
           echo "API_GITHUB: $API_GITHUB"
           PR_REQUEST_URL="$API_GITHUB/pulls/$PR_NUMBER"
           echo "PR_REQUEST_URL: $PR_REQUEST_URL"

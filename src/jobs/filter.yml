@@ -31,18 +31,10 @@ parameters:
     type: string
     description: "Resource class to use"
     default: "small"
-  organization:
-    description: github project username
-    type: string
-    default: $CIRCLE_PROJECT_USERNAME
-  repository:
-    description: github project reponame
-    type: string
-    default: $CIRCLE_PROJECT_REPONAME
   github_token:
     description: github access token
     type: string
-    default: ''
+    default: ""
 
 steps:
   - when:
@@ -54,8 +46,6 @@ steps:
             at: << parameters.workspace_path >>
   - checkout
   - get-pr-target-branch:
-      organization: << parameters.organization >>
-      repository: << parameters.repository >>
       github_token: << parameters.github_token >>
   - set-parameters:
       mapping: << parameters.mapping >>
