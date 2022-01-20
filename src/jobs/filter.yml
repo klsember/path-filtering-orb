@@ -1,18 +1,13 @@
 description: >
   Continues a pipeline in the `setup` state based with static config
-  and a set of pipeline parameters based on the changes in this push.
+  and a set of pipeline parameters based on the changes in this push 
+  where `base-revision is set by Pull Request Target Branch or Current Branch.
 
 executor: default
 
 resource_class: << parameters.resource_class >>
 
 parameters:
-  base-revision:
-    type: string
-    default: "main"
-    description: >
-      The revision to compare the current one against for the purpose
-      of determining changed files.
   mapping:
     type: string
     default: ""
@@ -36,6 +31,18 @@ parameters:
     type: string
     description: "Resource class to use"
     default: "small"
+  organization:
+    description: github project username
+    type: string
+    default: $CIRCLE_PROJECT_USERNAME
+  repository:
+    description: github project reponame
+    type: string
+    default: $CIRCLE_PROJECT_REPONAME
+  github_token:
+    description: github access token
+    type: string
+    default: ''
 
 steps:
   - when:
@@ -46,8 +53,11 @@ steps:
         - attach_workspace:
             at: << parameters.workspace_path >>
   - checkout
+  - get-pr-target-branch:
+      owner: << parameters.owner >>
+      repo: << parameters.repo >>
+      github_token: << parameters.github_token >>
   - set-parameters:
-      base-revision: << parameters.base-revision >>
       mapping: << parameters.mapping >>
   - continuation/continue:
       configuration_path: << parameters.config-path >>
