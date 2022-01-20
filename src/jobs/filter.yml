@@ -1,6 +1,6 @@
 description: >
   Continues a pipeline in the `setup` state based with static config
-  and a set of pipeline parameters based on the changes in this push 
+  and a set of pipeline parameters based on the changes in this push
   where `base-revision is set by Pull Request Target Branch or Current Branch.
 
 executor: default
