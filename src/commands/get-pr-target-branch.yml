@@ -2,8 +2,8 @@ description: Get GitHub PR Target Branch (if exists)
 parameters:
   github_token:
     description: github access token
-    type: string
-    default: ""
+    type: env_var_name
+    default: GITHUB_TOKEN
 steps:
   - run:
       name: Get Pull Request Target Branch
