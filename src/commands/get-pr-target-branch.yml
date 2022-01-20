@@ -52,3 +52,4 @@ steps:
         else
           echo 'export BASE_REVISION=$CIRCLE_BRANCH' >> $BASH_ENV; source $BASH_ENV
         fi
+        echo "Will be using" $BASE_REVISION "as the Target Base-Revision branch"
