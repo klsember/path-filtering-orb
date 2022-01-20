@@ -35,8 +35,6 @@ steps:
           echo "There is no pull request associated with this commit"
         fi
       environment:
-        ORGANIZATION: << parameters.organization >>
-        REPOSITORY: << parameters.repository >>
         GITHUB_TOKEN: << parameters.github_token >>
   - run:
       name: Set Target Branch or Current Branch as Base Revision
